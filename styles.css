@@ -16,7 +16,8 @@
 
 
 html {
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -99,10 +100,13 @@ button {
     color: white;
 }
 
+
+
 .sidebar {
     height: 100%;
     width: 0;
     position: fixed;
+    margin-bottom: 50px;
     z-index: 1;
     top: 0;
     left: 0;
@@ -110,15 +114,24 @@ button {
     transition: 0.5s;
     font-size: 30px;
     background-color: #111;
-    padding-top: 60px;
+    padding-bottom: 60px;
+    /* padding: 60px 0;*/
     font-family: 'Montserrat';
+
 }
+
 
 .sidebar p {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     display: block;
     transition: 0.3s;
+}
+
+.linkEpisodes-list {
+
+
+    margin: 10px 50px 50px 0;
 }
 
 .sidebar .closebtn {
@@ -163,12 +176,24 @@ button {
 
 }
 
+
+
+
 .lava {
     position: absolute;
     margin: 100px auto;
     left: 40%;
 
 }
+
+
+
+
+.label {
+
+    color: #c1f762;
+}
+
 
 .characters-container {
 
@@ -180,18 +205,24 @@ button {
     font-size: 30px;
     overflow-y: auto;
 
-
 }
 
-.label {
-
-    color: #c1f762;
-}
-
-.characters-container img {
+/*.characters-container img {
 
     max-width: 300px;
+}*/
+
+
+.characters-container>div {
+
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    margin: 50px 50px 0 0;
+    width: 400px;
+
 }
+
 
 .characters-container>div>* {
 
@@ -200,6 +231,7 @@ button {
 
 }
 
+
 .characters-container>div li {
 
     margin-top: 20px;
@@ -207,16 +239,7 @@ button {
 
 
 
-.characters-container>div {
 
-    display: flex;
-    flex-direction: column;
-    border: 1px solid white;
-    margin: auto;
-
-
-
-}
 
 
 .hidden {
