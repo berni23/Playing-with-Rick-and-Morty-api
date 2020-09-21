@@ -19,58 +19,84 @@ html {
     width: 100%
 }
 
+body {
+
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    position: relative;
+    background-image: url("background_3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Montserrat';
+    background: url("background_3.jpg") center center cover no-repeat fixed;
+    color: white;
+
+}
+
+
+ul {
+
+    list-style-type: none;
+}
+
+header {
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    right: 0;
+    left: 0;
+    margin: 50px auto;
+    width: max-content;
+    padding: 16px;
+    color: #c1f762;
+}
+
+header>div {
+
+    position: relative;
+    margin-top: 30px;
+    color: white;
+    transition: 0.3s linear all;
+
+}
+
+/*width: calc(100% - 40px);*/
+
+
+.title {
+
+    font-family: "GetSchwifty-Regular";
+    font-size: 100px;
+    position: relative;
+    margin-top: 30px;
+    transition: 0.3s linear all;
+
+}
 
 main {
     transition: margin-left .5s;
     padding: 16px;
 }
 
-body {
 
-    margin: 0;
-    overflow: hidden;
-    padding-top: 15px;
-    min-height: 100%;
-    position: relative;
-    background-image: url("background_3.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background: url("background_3.jpg") center center cover no-repeat fixed;
+.chapter-name {
 
-
-
-}
-
-header {
-
-    display: flex;
     font-family: "GetSchwifty-Regular";
-    font-size: 100px;
-    color: white;
-    position: relative;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    width: max-content;
-    margin-top: 10px;
-
-    /*width: calc(100% - 40px);*/
-
-}
-
-header {
-
-    transition: margin-left .5s;
-    padding: 16px;
+    font-size: 50px;
 
 }
 
 
 
 button {
-
     cursor: pointer;
+    outline: none;
+    border: none;
+    color: white;
 }
 
 .sidebar {
@@ -82,7 +108,6 @@ button {
     left: 0;
     overflow-x: hidden;
     transition: 0.5s;
-    color: white;
     font-size: 30px;
     background-color: #111;
     padding-top: 60px;
@@ -100,18 +125,29 @@ button {
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 40px;
     margin-left: 50px;
+    transition: 0.3s linear all;
+}
+
+.loadChapters {
+
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    font-size: 30px;
+    margin-left: 25px;
+    transition: 0.3s linear all;
+
+    background-color: #111;
 }
 
 .openbtn {
-    position: relative;
-    bottom: 500px;
-    margin-top: 200px;
+    position: absolute;
+    top: 20px;
     font-size: 20px;
     cursor: pointer;
     background-color: #111;
-    color: white;
     padding: 10px 15px;
     border: none;
 }
@@ -134,15 +170,71 @@ button {
 
 }
 
+.characters-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 30px;
+    overflow-y: auto;
+
+
+}
+
+.label {
+
+    color: #c1f762;
+}
+
+.characters-container img {
+
+    max-width: 300px;
+}
+
+.characters-container>div>* {
+
+    margin: auto;
+
+
+}
+
+.characters-container>div li {
+
+    margin-top: 20px;
+}
+
+
+
+.characters-container>div {
+
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    margin: auto;
+
+
+
+}
+
+
 .hidden {
 
     display: none;
 }
 
+
+
 .displaySidebar {
 
     width: 250px;
 
+}
+
+.headerSidebar {
+
+    margin-left: 250px;
 }
 
 .mainSidebar {
@@ -158,23 +250,63 @@ color 3 : #75b34c
 */
 
 
+/* tooltip */
 
+
+.tooltiptext {
+    visibility: visible;
+    font-size: 30px;
+    font-family: 'Montserrat';
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    width: 500px;
+
+    /* Position the tooltip */
+
+}
+
+
+
+/* media queries */
 @media screen and (max-height: 450px) {
     .sidebar {
         padding-top: 15px;
 
     }
 
-
     .sidebar p {
         font-size: 18px;
 
     }
+
+    .title {
+        font-size: 50px;
+        transition: 0.3s linear all;
+    }
+
+
+    .header>div {
+        font-size: 25px;
+        transition: 0.3s linear all;
+
+    }
+
+    .iconify {
+        font-size: 15px;
+        transition: 0.3s linear all;
+    }
+
+
+    .closebtn {
+        font-size: 30px;
+        transition: 0.3s linear all;
+    }
+
 }
 
-
 @media screen and (max-width: 1000px) {
-
 
     .mainSidebar {
 
@@ -188,6 +320,19 @@ color 3 : #75b34c
 
     .sidebar p {
         font-size: 18px;
+
+    }
+
+    .title {
+
+        font-size: 50px;
+        transition: 0.3s linear all;
+    }
+
+    .header>div {
+
+        font-size: 25px;
+        transition: 0.3s linear all;
 
     }
 

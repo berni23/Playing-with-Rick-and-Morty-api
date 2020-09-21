@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/script.js" defer></script>
     <title>Document</title>
@@ -15,29 +17,56 @@
 <body>
 
     <header>
+        <span class="title">Rick and Morty</span>
+        <div> <span class="chapter-name"> Earth, replacement dimension </span>
 
-        <button class="openbtn">☰ Open Sidebar</button>
-        <p>Rick and Morty</p>
+            <span class="tooltiptext">December 23, 2013 |
+                S01E1</span> </div>
+
 
     </header>
-
-
     <div id="loading-id" class="lava hidden">
         <img src="lava_rickMorty.svg">
-
     </div>
     <sidebar class="sidebar">
+        <button class="loadChapters"><span class="iconify" data-icon="si-glyph:circle-load-left"
+                data-inline="false"></span></button>
 
         <a class="closebtn">×</a>
-        <p>Episode 1</p>
-        <p>Episode 2</p>
-        <p>Episode 3</p>
     </sidebar>
 
     <main>
 
+        <button class="openbtn">☰</button>
+        <div class="characters-container">
 
-        <button class="openbtn">☰ Open Sidebar</button>
+            <div>
+                <img src="images/1.jpeg">
+
+                <ul>
+                    <li><span class="label">Name: </span><span>Rick</span></li>
+                    <li><span class="label">Status: </span><span>Alive</span></li>
+                    <li><span class="label">Specie: </span><span>Human</span></li>
+
+                </ul>
+
+            </div>
+            <div>
+                <p>Im a div LOOOOOOL</p>
+            </div>
+
+            <div>
+                <p>Im a div LOOOOOOL</p>
+            </div>
+
+            <div>
+                <p>Im a div LOOOOOOL</p>
+            </div>
+
+
+
+
+        </div>
 
 
     </main>
