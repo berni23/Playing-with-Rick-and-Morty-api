@@ -1,15 +1,38 @@
 $(function () {
 
 
+    var closeNavBtn = $('.closebtn');
+    var openNavBtn = $('.openbtn');
+    var sidebar = $(".sidebar");
+    var main = $("main");
+
+    closeNavBtn.click(function () {
+        closeNav()
+    })
+
+
+    openNavBtn.click(function () {
+        openNav()
+    })
+
     function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+
+        /* sidebar.css("width", "250px");
+         main.css("marginLeft", "250px");*/
+
+        sidebar.addClass("displaySidebar")
+        main.addClass("mainSidebar")
     }
 
     function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
+
+        sidebar.removeClass("displaySidebar")
+        main.removeClass("mainSidebar")
+        /*sidebar.css("width", "0");
+        main.css("marginLeft", "0");*/
     }
+
+
 
 
 })

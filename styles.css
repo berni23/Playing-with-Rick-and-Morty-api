@@ -16,23 +16,22 @@
 
 
 html {
-    padding: 0;
-    margin: 0;
+    width: 100%
 }
 
 
+main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
 
 body {
 
-    padding: 0;
     margin: 0;
-    position: relative;
     overflow: hidden;
     padding-top: 15px;
-    padding-bottom: 3rem;
     min-height: 100%;
     position: relative;
-
     background-image: url("background_3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -45,6 +44,7 @@ body {
 
 header {
 
+    display: flex;
     font-family: "GetSchwifty-Regular";
     font-size: 100px;
     color: white;
@@ -59,49 +59,136 @@ header {
 
 }
 
-main {
+header {
 
-    width: 100%;
-    height: 100%;
     transition: margin-left .5s;
     padding: 16px;
 
 }
 
+
+
+button {
+
+    cursor: pointer;
+}
+
 .sidebar {
-
-    width: 0px !important;
     height: 100%;
+    width: 0;
     position: fixed;
-
+    z-index: 1;
     top: 0;
     left: 0;
-    font-size: 30px;
+    overflow-x: hidden;
+    transition: 0.5s;
     color: white;
-
+    font-size: 30px;
     background-color: #111;
     padding-top: 60px;
     font-family: 'Montserrat';
-
-
-    /*background-image: linear-gradient(to top, #606c88, #3f4c6b 90%);
-    /* background-image: url("show_me.jpg");
-    backgro
-    nd-size: cover;
-    background-repeat: no-repeat;
-
-    */
 }
 
-.sidebar>p {
-    width: 0px !important;
+.sidebar p {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     display: block;
-
+    transition: 0.3s;
 }
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    position: relative;
+    bottom: 500px;
+    margin-top: 200px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
 
 .sidebar p:hover {
     color: #c1f762;
+    cursor: pointer;
+
+}
+
+.lava {
+    position: absolute;
+    margin: 100px auto;
+    left: 40%;
+
+}
+
+.hidden {
+
+    display: none;
+}
+
+.displaySidebar {
+
+    width: 250px;
+
+}
+
+.mainSidebar {
+
+    margin-left: 250px;
+}
+
+/*
+color 1 : #d4ecc9
+color 2: #a2d895
+color 3 : #75b34c
+
+*/
+
+
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+
+    }
+
+
+    .sidebar p {
+        font-size: 18px;
+
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+
+
+    .mainSidebar {
+
+        margin-left: 150px;
+    }
+
+    .displaySidebar {
+
+        width: 150px;
+    }
+
+    .sidebar p {
+        font-size: 18px;
+
+    }
 
 }
