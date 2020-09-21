@@ -10,6 +10,10 @@ $(function () {
     var storedChars = [] // characters stored by id (position)
     var charsContainer = $(".characters-container");
     var linkEpisodes = $('.linkEpisodes-list');
+    var chapterName = $('.chapter-name');
+    var chapterInfo = $('.chapter-info');
+    var loading = $('#loading-id');
+    var noQuery = true;
 
     openNavBtn.click(function () {
         openNav()
@@ -36,7 +40,15 @@ $(function () {
         if ($(event.target).hasClass('closebtn')) closeNav()
         else if ($(event.target).hasClass('episode')) {
 
+            if (noQuery) loading.addClass("hidden")
+
             var episode = episodes[$(event.target).data("episode") - 1]
+
+            chapterName.text(episode.name)
+            chapterInfo.text(episode.air_date + " | " + episode.episode)
+
+            console.log("EPISODE", episode)
+            charsContainer.empty();
             var charLinks = episode.characters
             for (i = 0; i < charLinks.length; i++) {
 
@@ -47,13 +59,12 @@ $(function () {
 
                 else {
 
-                    console.log("charLink", charLinks[i])
+                    // console.log("charLink", charLinks[i])
                     char = axios.get(charLinks[i]).then(function (data) {
 
                         storedChars[charId - 1] = data.data;
 
-                        console.log("char data:",
-                            data.data)
+                        // console.log("char data:",data.data)
 
                         displayCharacter(data.data)
                     })
@@ -71,10 +82,8 @@ $(function () {
 
         var container = $("<div></div>")
 
-        console.log(char.image)
+        //var imgContent = '<img src ="' + char.image + '">'
 
-        var imgContent = '<img src ="' + char.image + '">'
-        console.log('imgContent', imgContent)
         var img = $('<img src ="' + char.image + '">');
         var ul = $("<ul></ul>");
         var name = $('<li><span class="label"> Name: </span><span>' + char.name + '</span></li>');
@@ -96,13 +105,14 @@ $(function () {
          console.log(episodes)
          */
 
+
         keys.forEach(function (key) {
             episodes.push(results[key]);
             addEpisodeSidebar(parseInt(key) + 1);
 
         })
 
-        console.log('episodes', episodes);
+
     })
 
 

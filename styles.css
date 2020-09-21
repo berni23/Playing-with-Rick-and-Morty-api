@@ -156,7 +156,7 @@ button {
 }
 
 .openbtn {
-    position: absolute;
+    position: fixed;
     top: 20px;
     font-size: 20px;
     cursor: pointer;
@@ -182,7 +182,7 @@ button {
 .lava {
     position: absolute;
     margin: 100px auto;
-    left: 40%;
+    left: 30%;
 
 }
 
@@ -276,7 +276,7 @@ color 3 : #75b34c
 /* tooltip */
 
 
-.tooltiptext {
+.chapter-info {
     visibility: visible;
     font-size: 30px;
     font-family: 'Montserrat';
