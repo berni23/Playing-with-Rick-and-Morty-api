@@ -6,9 +6,8 @@ $(function () {
     var title = $("header>*");
     var episodes = []; // episodes stored by id (position)
     var storedChars = []; // characters stored by id (position)
-    var storedLocations = []; // locations stored by id (position)
     var charsContainer = $(".characters-container");
-    var linkEpisodes = $('.linkEpisodes-list');
+    //var linkEpisodes = $('.linkEpisodes-list');
     var chapterName = $('.chapter-name');
     var chapterInfo = $('.chapter-info');
     var loading = $('#loading-id');
@@ -118,8 +117,8 @@ $(function () {
         chapterInfo.text("");
         imageView.attr("src", char.image);
         specieView.text(char.specie)
-        locationView.text(char.location.name)
-        locationView.data("id", idFromUrl(char.location.url))
+        locationView.text(char.origin.name)
+        locationView.data("id", idFromUrl(char.origin.url))
         genderView.text(char.gender)
         statusView.text(char.status)
     }
@@ -167,7 +166,7 @@ $(function () {
             var response = data.data
             console.log(response)
             chapterName.text(response.name)
-            chapterInfo.text(response.type + " | " + response.dimension)
+            chapterInfo.text("  " + response.type + " | " + response.dimension)
             return response.residents
 
         })
