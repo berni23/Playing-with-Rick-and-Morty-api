@@ -9,8 +9,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-    <link rel="stylesheet" href="/styles.css" />
-    <script src="/script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
     <title>Document</title>
 </head>
 
@@ -18,10 +18,10 @@
 
     <header>
         <span class="title">Rick and Morty</span>
-        <div> <span class="chapter-name"> Earth, replacement dimension </span>
+        <div> <span class="chapter-name"></span>
 
-            <span class="chapter-info">December 23, 2013 |
-                S01E1</span> </div>
+            <span class="chapter-info">
+            </span> </div>
     </header>
     <div id="loading-id" class="lava">
         <img src="lava_rickMorty.svg">
@@ -31,46 +31,40 @@
                 data-inline="false"></span></button>
 
         <a class="closebtn">×</a>
-
         <br><br>
-
     </sidebar>
-
     <main>
         <button class="openbtn">☰</button>
         <div class="characters-container">
-
-            <div>
-                <img src="images/1.jpeg">
-
-                <ul>
-                    <li><span class="label">Name: </span><span>Rick</span></li>
-                    <li><span class="label">Status: </span><span>Alive</span></li>
-                    <li><span class="label">Specie: </span><span>Human</span></li>
-
-                </ul>
-
-            </div>
-            <!--<div>
-                <p>Im a div LOOOOOOL</p>
-            </div>
-
-            <div>
-                <p>Im a div LOOOOOOL</p>
-            </div>
-
-            <div>
-                <p>Im a div LOOOOOOL</p>
-            </div>-->
-
-
-
-
         </div>
-
-
+        <div class="character-view hidden">
+            <div class="character-info">
+                <img class="image-view" src="images/1.jpeg">
+                <ul>
+                    <li><span class="label">Specie: </span><span class="specie">Human</span></li>
+                    <li><span class="label">Status: </span><span class="status">Alive</span></li>
+                    <li><span class="label">Gender: </span><span class="gender">Male</span></li>
+                    <li>
+                        <div class="link-location"><span class="label">Location: </span><span class="location">Earth
+                                C-137
+                                (replacement
+                                dimension)</span><span> click for more info</span></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chapters-character">
+                <!--<div><span class="label">Episode 1</span> <span>S01 E01</span></div>'
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                <div><span class="label">Episode 1</span> <span>S01 E01</span></div>
+                -->
+            </div>
+        </div>
     </main>
-
 </body>
 
 </html>
