@@ -13,20 +13,18 @@ $(function () {
     var chapterName = $('.chapter-name');
     var chapterInfo = $('.chapter-info');
     var loading = $('#loading-id');
-    var noQuery = true;
+    var loadChapters = $(".loadChapters")
 
-    var nav = true
+    var currentChapterPage = 1;
 
     openNavBtn.click(function () {
 
-        // sidebar.hasClass("displaySidebar")
-        if (nav) openNav()
-        else closeNav()
+        if (sidebar.hasClass("displaySidebar")) closeNav()
+        else openNav()
     })
 
     function openNav() {
 
-        nav = false
         title.animate({
             left: "+=250"
         }, 0.3, "linear")
@@ -34,12 +32,9 @@ $(function () {
         sidebar.addClass("displaySidebar")
         main.addClass("mainSidebar")
 
-
     }
 
     function closeNav() {
-
-        nav = true
         sidebar.removeClass("displaySidebar")
         main.removeClass("mainSidebar")
         title.animate({
@@ -47,54 +42,71 @@ $(function () {
         }, 0.3, "linear") //css("left", "-=250")
     }
 
+
+    loadChapters.click(function () {
+
+        currentChapterPage++;
+        getChapterPage(currentChapterPage)
+
+
+    })
+
     sidebar.click(function (event) {
 
         if ($(event.target).hasClass('closebtn')) closeNav()
-
-
         else if ($(event.target).hasClass('episode')) {
 
             loading.removeClass("hidden")
-
             var episode = episodes[$(event.target).data("episode") - 1]
-
             chapterName.text(episode.name)
             chapterInfo.text(episode.air_date + " | " + episode.episode)
-
-            //console.log("EPISODE", episode)
+            console.log("EPISODE", episode)
             charsContainer.empty();
             var charLinks = episode.characters
-
-            console.log("storedChars", storedChars)
+            var charNum = 0 // in order to hide the loading icon at the end, we need to know if the async task is the last one or not
             var currentCharList = storedChars.slice()
 
             for (var i = 0; i < charLinks.length; i++) {
 
                 var charId = idFromUrl(charLinks[i])
+                var char = currentCharList[charId - 1] // arrays start at 0, id's do not
+                if (char) { // if character was displayed in the past, its data is already stored
+                    displayCharacter(char)
+                    charNum++
+                    if (charNum == charLinks.length) loading.addClass("hidden");
 
-                console.log(charId)
-                var char = currentCharList[charId - 1] // arrays start at 0
-                if (char) displayCharacter(char)
-
-                else {
-
-                    // console.log("charLink", charLinks[i])
-
-                    getCharacter(charLinks[i], charId)
-
+                } else {
+                    charNum++
+                    getCharacter(charLinks[i], charId, charNum, charLinks.length)
                 }
-
 
             }
 
-            loading.addClass("hidden")
-
         }
     })
-    // displayCharacter(episodes[$(event.target).data("episode") - 1].characters[0])
 
+    // initialize
 
-    function getCharacter(link, id) {
+    getChapterPage(currentChapterPage);
+    setTimeout(loading.removeClass("hidden"), 100)
+
+    function getChapterPage(page) {
+
+        loading.removeClass("hidden")
+        axios.get(HOME + "episode?page=" + page).then(function (data) {
+
+            var results = data.data.results
+            results.forEach(function (episode) {
+                addEpisodeSidebar(episode.id);
+                episodes.push(episode);
+            })
+        }).catch(function (error) {
+            console.log("no more episodes to load")
+        }).finally(loading.addClass("hidden"))
+
+    }
+
+    function getCharacter(link, id, charNum, maxChar) {
         axios.get(link).then(function (data) {
             // console.log("char data:",data.data)
             displayCharacter(data.data)
@@ -103,6 +115,7 @@ $(function () {
 
             storedChars[id - 1] = data
             console.log(storedChars);
+            if (charNum == maxChar) loading.addClass("hidden")
         })
 
     }
@@ -110,7 +123,6 @@ $(function () {
     function displayCharacter(char) {
 
         var container = $("<div></div>")
-
         //var imgContent = '<img src ="' + char.image + '">'
 
         var img = $('<img src ="' + char.image + '">');
@@ -124,27 +136,7 @@ $(function () {
         charsContainer.append(container);
     }
 
-    // initialize
-
-    axios.get(HOME + "episode").then(function (data) {
-
-        var results = data.data.results;
-        var keys = Object.keys(results)
-        /* console.log(keys)
-         console.log(episodes)
-         */
-
-        keys.forEach(function (key) {
-            episodes.push(results[key]);
-            addEpisodeSidebar(parseInt(key) + 1);
-
-        })
-
-    })
-
-
     function addEpisodeSidebar(id) {
-
         sidebar.append($("<p class = 'episode' data-episode = '" + id + "'>Episode " + id + "</p>"));
 
     }
@@ -157,12 +149,8 @@ $(function () {
 
     }
 
-
-
-
     //var requests = [axios.get(url), axios.get(url), axios.get(url)]​
     //axios.all(requests)
-
 
 
 })
