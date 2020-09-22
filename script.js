@@ -15,68 +15,97 @@ $(function () {
     var loading = $('#loading-id');
     var noQuery = true;
 
+    var nav = true
+
     openNavBtn.click(function () {
-        openNav()
+
+        // sidebar.hasClass("displaySidebar")
+        if (nav) openNav()
+        else closeNav()
     })
 
     function openNav() {
-        if (!sidebar.hasClass("displaySidebar")) title.css("left", "+=250")
-        else title.css("left", "-=250")
-        sidebar.toggleClass("displaySidebar")
-        main.toggleClass("mainSidebar")
+
+        nav = false
+        title.animate({
+            left: "+=250"
+        }, 0.3, "linear")
+        //  else title.css("left", "-=250")
+        sidebar.addClass("displaySidebar")
+        main.addClass("mainSidebar")
 
 
     }
 
     function closeNav() {
 
+        nav = true
         sidebar.removeClass("displaySidebar")
         main.removeClass("mainSidebar")
-        title.css("left", "-=250")
+        title.animate({
+            left: "-=250"
+        }, 0.3, "linear") //css("left", "-=250")
     }
 
     sidebar.click(function (event) {
 
         if ($(event.target).hasClass('closebtn')) closeNav()
+
+
         else if ($(event.target).hasClass('episode')) {
 
-            if (noQuery) loading.addClass("hidden")
+            loading.removeClass("hidden")
 
             var episode = episodes[$(event.target).data("episode") - 1]
 
             chapterName.text(episode.name)
             chapterInfo.text(episode.air_date + " | " + episode.episode)
 
-            console.log("EPISODE", episode)
+            //console.log("EPISODE", episode)
             charsContainer.empty();
             var charLinks = episode.characters
-            for (i = 0; i < charLinks.length; i++) {
+
+            console.log("storedChars", storedChars)
+            var currentCharList = storedChars.slice()
+
+            for (var i = 0; i < charLinks.length; i++) {
 
                 var charId = idFromUrl(charLinks[i])
-                var char = storedChars[charId - 1] // arrays start at 0
 
+                console.log(charId)
+                var char = currentCharList[charId - 1] // arrays start at 0
                 if (char) displayCharacter(char)
 
                 else {
 
                     // console.log("charLink", charLinks[i])
-                    char = axios.get(charLinks[i]).then(function (data) {
 
-                        storedChars[charId - 1] = data.data;
+                    getCharacter(charLinks[i], charId)
 
-                        // console.log("char data:",data.data)
-
-                        displayCharacter(data.data)
-                    })
                 }
+
+
             }
 
+            loading.addClass("hidden")
+
         }
-        // displayCharacter(episodes[$(event.target).data("episode") - 1].characters[0])
-
     })
+    // displayCharacter(episodes[$(event.target).data("episode") - 1].characters[0])
 
 
+    function getCharacter(link, id) {
+        axios.get(link).then(function (data) {
+            // console.log("char data:",data.data)
+            displayCharacter(data.data)
+            return data.data
+        }).then(function (data) {
+
+            storedChars[id - 1] = data
+            console.log(storedChars);
+        })
+
+    }
 
     function displayCharacter(char) {
 
@@ -105,13 +134,11 @@ $(function () {
          console.log(episodes)
          */
 
-
         keys.forEach(function (key) {
             episodes.push(results[key]);
             addEpisodeSidebar(parseInt(key) + 1);
 
         })
-
 
     })
 
@@ -122,14 +149,15 @@ $(function () {
 
     }
 
-
     function idFromUrl(url) {
-        var last2 = url.slice(-2);
-        if (last2[0] === "/") return url.slice(-1)
-        return last2
-
+        var last3 = url.slice(-3);
+        if (last3[0] === "/") return url.slice(-2)
+        if (last3[1] === "/") return url.slice(-1);
+        return last3;
 
     }
+
+
 
 
     //var requests = [axios.get(url), axios.get(url), axios.get(url)]​
