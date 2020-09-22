@@ -188,7 +188,6 @@ button {
 
 }
 
-
 .lava {
     position: absolute;
     margin: 100px auto;
@@ -241,7 +240,7 @@ button {
 .characters-container>div {
     display: flex;
     flex-direction: column;
-    margin: 50px 50px 0 0;
+    margin: 75px 50px 0 0;
     width: 400px;
 }
 
@@ -250,6 +249,8 @@ button {
     margin: auto;
 
 }
+
+
 
 .characters-container>div li {
     margin-top: 20px;
