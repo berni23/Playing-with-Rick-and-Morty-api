@@ -1,4 +1,7 @@
 $(function () {
+
+    // variables
+
     var HOME = "https://rickandmortyapi.com/api/"
     var openNavBtn = $('.openbtn');
     var sidebar = $(".sidebar");
@@ -7,7 +10,6 @@ $(function () {
     var episodes = []; // episodes stored by id (position)
     var storedChars = []; // characters stored by id (position)
     var charsContainer = $(".characters-container");
-    //var linkEpisodes = $('.linkEpisodes-list');
     var chapterName = $('.chapter-name');
     var chapterInfo = $('.chapter-info');
     var loading = $('#loading-id');
@@ -21,6 +23,10 @@ $(function () {
     var imageView = $('.image-view')
     var chapterView = $('.chapters-character')
     var locationContainer = $('.location-container')
+
+
+    // event listeners
+
     openNavBtn.click(function () {
         if (sidebar.hasClass("displaySidebar")) closeNav()
         else openNav()
@@ -76,52 +82,45 @@ $(function () {
     })
 
     locationView.parent().click(function (event) {
-        var id = locationView.data("id");
-        charsContainer.empty()
-        charsContainer.removeClass("hidden")
-        characterView.addClass("hidden")
 
-        getLocation(id).then(function (residents) {
-            var charList = storedChars
-            var charNum = 0;
-            for (var i = 0; i < residents.length; i++) {
-                var charId = idFromUrl(residents[i]);
-                var char = charList[charId - 1];
-                if (char) {
-                    var container = displayCharacter(char);
-                    charsContainer.append(container);
-                    charNum++;
-                    if (charNum === residents.length) loading.addClass("hidden")
-                } else {
-                    charNum++
-                    getCharacter(residents[i], charId).then(function (data) {
-                        var container = displayCharacter(data)
+        if (locationView.text() !== "unknown") {
+            var id = locationView.data("id");
+            charsContainer.empty()
+            charsContainer.removeClass("hidden")
+            characterView.addClass("hidden")
+
+            getLocation(id).then(function (residents) {
+                var charList = storedChars
+                var charNum = 0;
+                for (var i = 0; i < residents.length; i++) {
+                    var charId = idFromUrl(residents[i]);
+                    var char = charList[charId - 1];
+                    if (char) {
+                        var container = displayCharacter(char);
                         charsContainer.append(container);
+                        charNum++;
                         if (charNum === residents.length) loading.addClass("hidden")
-                    })
+                    } else {
+                        charNum++
+                        getCharacter(residents[i], charId).then(function (data) {
+                            var container = displayCharacter(data)
+                            charsContainer.append(container);
+                            if (charNum === residents.length) loading.addClass("hidden")
+                        })
+                    }
                 }
-            }
-        })
+            })
+
+        } else(console.log("Location unknown"))
     })
 
-    // initialize
+    // initialization
 
     getChapterPage(currentChapterPage);
     setTimeout(loading.removeClass("hidden"), 100)
 
-    function createCharView(char) {
 
-        console.log("chapterName", char.name)
-        characterView.removeClass("hidden")
-        chapterName.text(char.name);
-        chapterInfo.text("");
-        imageView.attr("src", char.image);
-        specieView.text(char.specie)
-        locationView.text(char.origin.name)
-        locationView.data("id", idFromUrl(char.origin.url))
-        genderView.text(char.gender)
-        statusView.text(char.status)
-    }
+    // queries
 
     function getEpisodesFromChar(arrayUrlEpisodes) {
         chapterView.empty();
@@ -172,6 +171,22 @@ $(function () {
         })
     }
 
+
+    //Display info into html
+
+    function createCharView(char) {
+
+        characterView.removeClass("hidden")
+        chapterName.text(char.name);
+        chapterInfo.text("");
+        imageView.attr("src", char.image);
+        specieView.text(char.specie)
+        locationView.text(char.origin.name)
+        locationView.data("id", idFromUrl(char.origin.url))
+        genderView.text(char.gender)
+        statusView.text(char.status)
+    }
+
     function displayCharacter(char) {
         var container = $("<div></div>")
         var img = $('<img class = "image" data-id =' + char.id + ' src ="' + char.image + '">');
@@ -188,12 +203,20 @@ $(function () {
         sidebar.append($("<p class = 'episode' data-episode = '" + id + "'>Episode " + id + "</p>"));
     }
 
+
+    // utilities
+
+
+    // get the id from the url (substracting the id at the end of it)
     function idFromUrl(url) {
         var last3 = url.slice(-3);
         if (last3[0] === "/") return url.slice(-2)
         if (last3[1] === "/") return url.slice(-1);
         return last3;
     }
+
+
+    // functionalities for opening / closing sidebar
 
     function openNav() {
         title.animate({

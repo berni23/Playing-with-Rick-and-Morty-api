@@ -224,14 +224,13 @@ button {
     flex-direction: column;
     margin: 75px 50px 0 0;
     width: 400px;
+    transition: 0.3s linear all;
 }
 
 
 .characters-container>div>* {
     margin: auto;
-
 }
-
 
 
 .characters-container>div li {
@@ -240,7 +239,6 @@ button {
 
 /* on character clicked */
 .character-view {
-
     display: flex;
     margin: auto;
     justify-content: center;
@@ -249,6 +247,11 @@ button {
 
 }
 
+.character-view>div {
+    transition: 0.3s linear all;
+}
+
+
 .character-info {
     display: flex;
     width: 100%;
@@ -256,7 +259,6 @@ button {
 }
 
 .character-info li {
-
     margin-bottom: 20px;
 }
 
@@ -330,6 +332,14 @@ button {
 
     }
 
+    .characters-container>div {
+
+        transform: scale(0.7);
+        margin: 45px 25px 0 0;
+        transition: 0.3s linear all;
+    }
+
+
     .chapter-name,
     .chapter-info {
         font-size: 25px;
@@ -370,6 +380,24 @@ button {
         display: flex;
         flex-direction: column;
     }
+
+
+    .characters-container>div {
+
+        transform: scale(0.7);
+        margin: 45px 25px 0 0;
+        transition: 0.3s linear all;
+    }
+
+
+    .character-view>div {
+
+        transform: scale(0.7);
+        transition: 0.3s linear all;
+
+    }
+
+
 
     .mainSidebar {
         margin-left: 150px;
