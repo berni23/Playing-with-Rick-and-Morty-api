@@ -123,8 +123,6 @@ button {
 }
 
 .linkEpisodes-list {
-
-
     margin: 10px 50px 50px 0;
 }
 
@@ -138,14 +136,12 @@ button {
 }
 
 .loadChapters {
-
     position: absolute;
     top: 10px;
     right: 50px;
     font-size: 30px;
     margin-left: 25px;
     transition: 0.3s linear all;
-
     background-color: #111;
 }
 
@@ -183,12 +179,10 @@ button {
 
 
 .link-location {
-
     transition: 0.3s linear all;
 }
 
 .link-location:hover {
-
     transform: scale(1.1);
     color: blue;
     transition: all 0.3s linear;
@@ -196,7 +190,6 @@ button {
 }
 
 .characters-container {
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -207,9 +200,7 @@ button {
 
 }
 
-
 .characters-container img {
-
     transition: 0.3s linear all;
 
 }
@@ -250,7 +241,6 @@ button {
 .character-view>div {
     transition: 0.3s linear all;
 }
-
 
 .character-info {
     display: flex;
@@ -333,7 +323,6 @@ button {
     }
 
     .characters-container>div {
-
         transform: scale(0.7);
         margin: 45px 25px 0 0;
         transition: 0.3s linear all;
@@ -346,8 +335,12 @@ button {
         transition: 0.3s linear all;
     }
 
+
+
     .chapter-info {
         font-size: 15px;
+
+        width: 300px;
         transition: 0.3s linear all;
     }
 
@@ -373,6 +366,7 @@ button {
 
     .chapter-info {
         font-size: 15px;
+        width: 300px;
         transition: 0.3s linear all;
     }
 
@@ -396,8 +390,6 @@ button {
         transition: 0.3s linear all;
 
     }
-
-
 
     .mainSidebar {
         margin-left: 150px;

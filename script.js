@@ -1,7 +1,6 @@
 $(function () {
 
     // variables
-
     var HOME = "https://rickandmortyapi.com/api/"
     var openNavBtn = $('.openbtn');
     var sidebar = $(".sidebar");
@@ -21,9 +20,8 @@ $(function () {
     var genderView = $('.gender');
     var statusView = $('.status');
     var imageView = $('.image-view')
-    var chapterView = $('.chapters-character')
-    var locationContainer = $('.location-container')
-
+    var chapterView = $('.chapters-character');
+    var locationContainer = $('.location-container');
 
     // event listeners
 
@@ -65,7 +63,6 @@ $(function () {
                         var container = displayCharacter(data)
                         charsContainer.append(container);
                         if (charNum === charLinks.length) loading.addClass("hidden")
-
                     })
                 }
             }
@@ -74,21 +71,20 @@ $(function () {
     charsContainer.click(function (event) {
         var item = $(event.target)
         if (item.hasClass("image")) {
-            charsContainer.addClass("hidden")
+            charsContainer.addClass("hidden");
             var charId = item.data("id");
-            createCharView(storedChars[charId - 1])
-            getEpisodesFromChar(storedChars[charId - 1].episode)
+            createCharView(storedChars[charId - 1]);
+            getEpisodesFromChar(storedChars[charId - 1].episode);
         }
     })
 
     locationView.parent().click(function (event) {
-
         if (locationView.text() !== "unknown") {
             var id = locationView.data("id");
-            charsContainer.empty()
-            charsContainer.removeClass("hidden")
-            characterView.addClass("hidden")
-
+            charsContainer.empty();
+            charsContainer.removeClass("hidden");
+            characterView.addClass("hidden");
+            loading.removeClass("hidden")
             getLocation(id).then(function (residents) {
                 var charList = storedChars
                 var charNum = 0;
@@ -103,9 +99,9 @@ $(function () {
                     } else {
                         charNum++
                         getCharacter(residents[i], charId).then(function (data) {
-                            var container = displayCharacter(data)
+                            var container = displayCharacter(data);
                             charsContainer.append(container);
-                            if (charNum === residents.length) loading.addClass("hidden")
+                            if (charNum === residents.length) loading.addClass("hidden");
                         })
                     }
                 }
@@ -118,7 +114,6 @@ $(function () {
 
     getChapterPage(currentChapterPage);
     setTimeout(loading.removeClass("hidden"), 100)
-
 
     // queries
 
@@ -167,24 +162,21 @@ $(function () {
             chapterName.text(response.name)
             chapterInfo.text("  " + response.type + " | " + response.dimension)
             return response.residents
-
         })
     }
-
-
     //Display info into html
 
     function createCharView(char) {
-
         characterView.removeClass("hidden")
         chapterName.text(char.name);
         chapterInfo.text("");
         imageView.attr("src", char.image);
-        specieView.text(char.specie)
-        locationView.text(char.origin.name)
-        locationView.data("id", idFromUrl(char.origin.url))
-        genderView.text(char.gender)
-        statusView.text(char.status)
+        console.log(char.species);
+        specieView.text(char.species);
+        locationView.text(char.origin.name);
+        locationView.data("id", idFromUrl(char.origin.url));
+        genderView.text(char.gender);
+        statusView.text(char.status);
     }
 
     function displayCharacter(char) {
@@ -203,18 +195,16 @@ $(function () {
         sidebar.append($("<p class = 'episode' data-episode = '" + id + "'>Episode " + id + "</p>"));
     }
 
-
     // utilities
 
-
     // get the id from the url (substracting the id at the end of it)
+
     function idFromUrl(url) {
         var last3 = url.slice(-3);
         if (last3[0] === "/") return url.slice(-2)
         if (last3[1] === "/") return url.slice(-1);
         return last3;
     }
-
 
     // functionalities for opening / closing sidebar
 
